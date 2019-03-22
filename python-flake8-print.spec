@@ -58,7 +58,9 @@ rm -rf %{pypi_name}.egg-info
 %py3_install
 
 %check
-%{__python3} setup.py test
+# Currently there are no tests, even though setup.py says to run them.
+# rc5 means no tests run; so treat that as success.
+%{__python3} setup.py test || test $? -eq 5
 
 %files -n python3-%{pypi_name}
 %doc README.rst
